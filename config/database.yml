@@ -19,7 +19,6 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 development:
   <<: *default
   database: ship_track_development
@@ -80,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: ship_track_production
-  username: ship_track
+  database: <%= ENV["SHIP_TRACK_DATABASE_NAME"] %>
+  username: <%= ENV["SHIP_TRACK_DATABASE_USERNAME"] %>
   password: <%= ENV["SHIP_TRACK_DATABASE_PASSWORD"] %>

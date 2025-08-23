@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  arrival_date: 2025-08-23 15:56:20
+  freetime: 1
+  twenty_dry_count: 1
+  forty_dry_count: 1
+  twenty_refrigerated_count: 1
+  forty_refrigerated_count: 1
+  twenty_special_count: 1
+  forty_special_count: 1
+  status: MyString
+  customer: one
+
+two:
+  number: MyString
+  arrival_date: 2025-08-23 15:56:20
+  freetime: 1
+  twenty_dry_count: 1
+  forty_dry_count: 1
+  twenty_refrigerated_count: 1
+  forty_refrigerated_count: 1
+  twenty_special_count: 1
+  forty_special_count: 1
+  status: MyString
+  customer: two

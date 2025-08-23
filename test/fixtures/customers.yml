@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  status: MyString
+  client_code: MyString
+  group_name: MyString
+  pays_deposit: false
+  freetime_refrigerated: 1
+  freetime_dry: 1
+  priority: false
+
+two:
+  name: MyString
+  status: MyString
+  client_code: MyString
+  group_name: MyString
+  pays_deposit: false
+  freetime_refrigerated: 1
+  freetime_dry: 1
+  priority: false
