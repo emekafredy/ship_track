@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_23_191220) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_24_210900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,12 +93,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_23_191220) do
     t.decimal "original_amount", precision: 12, scale: 2
     t.string "currency", limit: 6, default: "USD"
     t.string "status", limit: 10, default: "init", null: false
-    t.datetime "date_facture", null: false
-    t.bigint "id_utilisateur", null: false
+    t.datetime "invoice_date", null: false
+    t.bigint "customer_id", null: false
     t.string "create_type_utilisateur", limit: 20
-    t.bigint "id_utilisateur_update"
+    t.bigint "customer_id_update"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "due_date"
     t.index ["reference"], name: "index_invoices_on_reference", unique: true
   end
 
