@@ -20,11 +20,21 @@ module Demurrage
       success?
     end
 
+    def summary
+      {
+        errors: errors,
+        created_invoices_count: created_invoices.count,
+        created_invoices: created_invoices.map(&:as_json),
+        skipped_bls: skipped_bls.map { |bl| { number: bl.number, reason: bl[:skip_reason] } }
+      }
+    end
+
+
+    private
+
     def success?
       errors.empty?
     end
-
-    private
 
     def todays_overdue_bls
       BillOfLading.joins(:customer).overdue_today
