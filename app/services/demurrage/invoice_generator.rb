@@ -29,7 +29,6 @@ module Demurrage
       }
     end
 
-
     private
 
     def success?
@@ -58,7 +57,7 @@ module Demurrage
         customer_id: bl.customer.id,
         customer_name: bl.customer.name,
         bill_of_lading_number: bl.number,
-        due_date: Date.current + 15.days,
+        due_date: Time.current + 15.days,
         invoice_amount: bl.calculate_demurrage_amount,
         reference: Utility::RandomString.alphanumeric,
         customer_code: bl.customer.customer_code || "UNKNOWN",
