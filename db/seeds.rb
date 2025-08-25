@@ -9,9 +9,7 @@
 #   end
 
 # db/seeds.rb
-# Clear existing data
 
-# Create customers
 customers = []
 customers << Customer.create!(
   name: "AA Trading Co",
@@ -29,7 +27,6 @@ customers << Customer.create!(
   name: "West Africa Logistics"
 )
 
-# Create Bills of Lading
 bill_of_ladings = []
 bill_of_ladings << BillOfLading.create!(
   freetime: 7,
@@ -101,7 +98,6 @@ Invoice.create!(
   bill_of_lading_number:  bill_of_ladings[3].number,
 )
 
-puts "Seeded:"
-puts "- #{Customer.count} customers"
-puts "- #{BillOfLading.count} bills of lading"
-puts "- #{Invoice.count} invoices"
+puts "#{Customer.count} customers seeded"
+puts "#{BillOfLading.count} bills of lading seeded"
+puts "#{Invoice.count} invoices seeded"
