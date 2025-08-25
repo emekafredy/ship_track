@@ -2,6 +2,10 @@ class BillOfLading < ApplicationRecord
   belongs_to :customer
   has_many :invoices, foreign_key: :bill_of_lading_number, primary_key: :number
 
+  validates :arrival_date, presence: true
+  validates :number, presence: true, uniqueness: true
+  validates :freetime, presence: true, numericality: { greater_than: 0 }
+
   scope :overdue_today, -> { where("DATE(arrival_date) + (freetime || ' days')::interval = ?", Date.current) }
 
   def total_containers

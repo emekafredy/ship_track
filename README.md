@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### System dependencies
 
-Things you may want to cover:
+- Rails 7.x.x
 
-* Ruby version
+#### Configuration
 
-* System dependencies
+- run bin/setup
+- start server with `rails s`
+- test endpoints
 
-* Configuration
+#### Design Decision
 
-* Database creation
+- Added proper foreign key from invoices.bill_of_lading_number to bill_of_lading.number for data integrity
+- Translated some (used) French column names to English while preserving legacy data structure
+- Maintained legacy integer IDs instead of Rails UUIDs for compatibility
 
-* Database initialization
+- Assumed Associations [Link](https://excalidraw.com/#json=fYeDYiksLdq7rfNDHp0A3,M2NvaKXIekky2zFQLs_osA)
 
-* How to run the test suite
+  - Customer ↔ BillOfLading (one-to-many).
+  - Customer ↔ Invoice (one-to-many).
+  - BillOfLading ↔ Invoice (one-to-many).
 
-* Services (job queues, cache servers, search engines, etc.)
+- InvoiceGenerator handles only invoice creation logic. This follows the Single Responsibility Principle.
+- Wrapped all operations in database transaction for atomic actions and safety.
+- Handle error properly by, continuing to process other BLs even if one fails
+- Logging and summary reporting
 
-* Deployment instructions
-
-* ...
+- Followed Rails conventions for resource-based URLs
+- Used a consistent structure for json response with metadata (counts, totals)
+- In error handling, used proper HTTP status codes and error details
