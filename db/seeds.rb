@@ -10,94 +10,33 @@
 
 # db/seeds.rb
 
-customers = []
-customers << Customer.create!(
-  name: "AA Trading Co",
-  group_name: "AA Group",
-  customer_code: "AAT001",
-)
-customers << Customer.create!(
-  customer_code: "GLB002",
-  group_name: "Global Group",
-  name: "Global Imports Ltd",
-)
-customers << Customer.create!(
-  customer_code: "WAL003",
-  group_name: "WAL Group",
-  name: "West Africa Logistics"
-)
 
-bill_of_ladings = []
-bill_of_ladings << BillOfLading.create!(
-  freetime: 7,
-  statut: "arrived",
-  nbre_40pieds_sec: 1,
-  nbre_20pieds_sec: 2,
-  number: "AA00001",
-  customer: customers[0],
-  vessel_name: "MSC GEN",
-  arrival_date: 7.days.ago,
-  consignee_name: "AA Trading Co",
-)
-bill_of_ladings << BillOfLading.create!(
-  freetime: 10,
-  statut: "arrived",
-  number: "GLB000002",
-  nbre_20pieds_sec: 1,
-  nbre_40pieds_sec: 2,
-  nbre_20pieds_frigo: 1,
-  customer: customers[1],
-  arrival_date: 11.days.ago,
-  vessel_name: "VOLTA",
-  consignee_name: "Global Imports Ltd",
-)
-bill_of_ladings << BillOfLading.create!(
-  freetime: 5,
-  statut: "arrived",
-  nbre_40pieds_sec: 3,
-  number: "WAL000003",
-  vessel_name: "MAERSK",
-  customer: customers[2],
-  arrival_date: 3.days.ago,
-  consignee_name: "West Africa Logistics",
-)
-bill_of_ladings << BillOfLading.create!(
-  freetime: 5,
-  statut: "arrived",
-  nbre_40pieds_sec: 3,
-  number: "GLB000005",
-  vessel_name: "VOLTAB",
-  customer: customers[1],
-  arrival_date: 60.days.ago,
-  consignee_name: "Global Imports Ltd",
-)
+c1 = FactoryBot.create(:customer)
+c2 = FactoryBot.create(:customer)
+c3 = FactoryBot.create(:customer)
 
+c1bl1 = FactoryBot.create(:bill_of_lading, :bl1, customer: c1)
+FactoryBot.create(:bill_of_lading, :bl2, customer: c1)
+c1bl3 = FactoryBot.create(:bill_of_lading, :bl3, customer: c1)
+FactoryBot.create(:bill_of_lading, :bl3, customer: c1)
 
-Invoice.create!(
-  status: "sent",
-  currency: "USD",
-  invoice_amount: 240,
-  reference: "INV0001",
-  due_date: 5.days.ago,
-  invoice_date: 20.days.ago,
-  customer_id: customers[2].id,
-  customer_name: customers[2].name,
-  customer_code: customers[2].customer_code,
-  bill_of_lading_number: bill_of_ladings[2].number,
-)
-Invoice.create!(
-  status: "paid",
-  currency: "USD",
-  invoice_amount: 160,
-  reference: "INV0002",
-  due_date: 15.days.ago,
-  invoice_date: 30.days.ago,
-  customer_id: customers[1].id,
-  customer_name: customers[1].name,
-  customer_code: customers[1].customer_code,
-  bill_of_lading_number:  bill_of_ladings[3].number,
-)
+c2bl1 = FactoryBot.create(:bill_of_lading, :bl1, customer: c2)
+c3bl2 = FactoryBot.create(:bill_of_lading, :bl2, customer: c2)
+c2bl3 = FactoryBot.create(:bill_of_lading, :bl3, customer: c2)
+FactoryBot.create(:bill_of_lading, :bl4, customer: c2)
 
-puts "#{Customer.count} customers seeded"
-puts "#{BillOfLading.count} bills of lading seeded"
-puts "#{Invoice.count} invoices seeded"
+c3bl1 = FactoryBot.create(:bill_of_lading, :bl1, customer: c3)
+c3bl2 = FactoryBot.create(:bill_of_lading, :bl2, customer: c3)
+c3bl3 = FactoryBot.create(:bill_of_lading, :bl3, customer: c3)
+c3bl4 = FactoryBot.create(:bill_of_lading, :bl4, customer: c3)
+
+FactoryBot.create(:invoice, bill_of_lading: c1bl1, status: 'sent', due_date: 2.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c1bl3, status: 'sent', due_date: 5.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c2bl1, status: 'sent', due_date: 6.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c3bl2, status: 'init', due_date: 2.days.from_now)
+FactoryBot.create(:invoice, bill_of_lading: c2bl3, status: 'paid', due_date: 3.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c3bl1, status: 'sent', due_date: 4.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c3bl3, status: 'paid', due_date: 2.days.ago)
+FactoryBot.create(:invoice, bill_of_lading: c3bl4, status: 'paid', due_date: 2.months.ago)
+
+puts "Records Created"

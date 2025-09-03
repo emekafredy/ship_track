@@ -20,7 +20,7 @@ class BillOfLading < ApplicationRecord
   end
 
   def has_open_invoice?
-    invoices.unpaid.exists?
+    invoices.not_paid.exists?
   end
 
   def calculate_demurrage_amount

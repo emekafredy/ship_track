@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   def overdue
-    overdue_invoices = Invoice.includes(:bill_of_lading).overdue
+    overdue_invoices = Invoice.overdue
 
     render json: {
       invoices: overdue_invoices.map do |invoice|

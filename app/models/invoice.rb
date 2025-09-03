@@ -11,9 +11,7 @@ class Invoice < ApplicationRecord
   validates :reference, presence: true, uniqueness: true, length: { maximum: 10 }
   validates :status, presence: true, inclusion: { in: %w[init sent overdue paid cancelled] }
 
-  enum :status, { init: "init", sent: "sent", paid: "paid", overdue: "overdue", cancelled: "cancelled" }.freeze
+  enum :status, { init: "init", sent: "sent", paid: "paid", overdue: "overdue", cancelled: "cancelled" }
 
   scope :overdue, -> { where("due_date < ? AND status != ?", Date.current, "paid") }
-  scope :unpaid, -> { where.not(status: "paid") }
-  scope :paid, -> { where(status: "paid") }
 end
