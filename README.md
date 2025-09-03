@@ -30,3 +30,8 @@
 - Followed Rails conventions for resource-based URLs
 - Used a consistent structure for json response with metadata (counts, totals)
 - In error handling, used proper HTTP status codes and error details
+
+### Curl Request Examples
+
+- Get overdue invoices: curl -X GET -H "Content-Type: application/json" http://localhost:3000/invoices/overdue
+- Generate invoices for overdue Bill of Ladings: curl -X POST -H "Content-Type: application/json" http://localhost:3000/invoices/generate
